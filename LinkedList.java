@@ -39,8 +39,7 @@ public class LinkedList<T> implements Iterable<T> {
      * @param element
      */
     public void prepend(T element) {
-        Node newNode = new Node(element, head);
-        head = newNode;
+        head = new Node(element, head);
         size++;
     }
 

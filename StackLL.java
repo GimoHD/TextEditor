@@ -4,15 +4,17 @@
  * @param <T> type of the elements on the stack
  */
 public class StackLL<T> implements Stack<T> {
+    private final int maxSize;
     private LinkedList<T> ll;
-    int maxSize;
+
     /**
      * Creates an empty stack
      */
-   public StackLL() {
+    public StackLL() {
         ll = new LinkedList<>();
         this.maxSize = -1;
     }
+
     public StackLL(int maxSize) {
         ll = new LinkedList<>();
         this.maxSize = maxSize;
@@ -36,7 +38,7 @@ public class StackLL<T> implements Stack<T> {
     @Override
     public void push(T element) {
         ll.prepend(element);
-        if (maxSize>0){
+        if (maxSize > 0) {
             ll.removeOverFlow(maxSize);
         }
 

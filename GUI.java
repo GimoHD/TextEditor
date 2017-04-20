@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,14 +10,14 @@ import java.awt.event.KeyListener;
  */
 public class GUI extends JFrame implements DocumentListener {
     private static final long serialVersionUID = 5514566716849599754L;
+    private final MenuBar menu;
     private JTextArea textArea;
     private UndoRedoManager urm;
-    private final MenuBar menu;
     private SuggestionMenu suggestion;
-    private boolean active = true;
     private HtmlParser parse;
+
     /**
-     * Constructs a new GUI: A TextArea on a ScrollPane
+     * Creates a GUI
      */
     public GUI() {
         super();
@@ -32,18 +31,21 @@ public class GUI extends JFrame implements DocumentListener {
         setTextArea(new JTextArea(30, 80));
         getTextArea().setLineWrap(true);
         getTextArea().setWrapStyleWord(true);
-getTextArea().setText("<html>\n\n\n</html>");
+        getTextArea().setText("<html>\n\n\n</html>");
         JScrollPane scrollPane = new JScrollPane(getTextArea());
         menu = new MenuBar(this);
         setJMenuBar(menu);
         add(scrollPane);
         setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         addActionInputs();
     }
 
 
+    /**
+     * Adds all input listeners
+     */
     private void addActionInputs() {
         getTextArea().addMouseListener(new PopClickListener(this));
 
@@ -107,6 +109,9 @@ getTextArea().setText("<html>\n\n\n</html>");
         getTextArea().getActionMap().put("checkDocument", checkDocument);
     }
 
+    /**
+     * Updates the undo and redo from the menu
+     */
     public void undoRedoUpdate() {
         menu.setUndo(urm.canUndo());
         menu.setRedo(urm.canRedo());
@@ -135,53 +140,67 @@ getTextArea().setText("<html>\n\n\n</html>");
      * Callback when inserting an element
      */
     public void insertUpdate(DocumentEvent ev) {
-        //Check if the change is only a single character, otherwise return so it does not go in an infinite loop
-        //if(active && ev.getLength()>0)
-        //	SwingUtilities.invokeLater(new Task(this,ev));
         if (suggestion != null) {
             suggestion.setVisible(false);
         }
-            suggestion = new SuggestionMenu(this);
+        suggestion = new SuggestionMenu(this);
 
 
     }
 
-    public void disableEvents() {
-        this.active = false;
-    }
-
-    public void enableEvents() {
-        this.active = true;
-    }
-
+    /**
+     * Gives the textarea where html is typed
+     *
+     * @return the JTextArea
+     */
     public JTextArea getTextArea() {
         return textArea;
     }
 
+    /**
+     * Sets the textarea
+     *
+     * @param textArea the textArea
+     */
     private void setTextArea(JTextArea textArea) {
         this.textArea = textArea;
     }
 
+    /**
+     * Gives back the UndoRedoManager that manages the undoing and redoing of the textarea
+     *
+     * @return an UndoRedoManager
+     */
     public UndoRedoManager getUrm() {
         return urm;
     }
 
+    /**
+     * Sets the UndoRedoManager
+     *
+     * @param urm an UndoRedoManager
+     */
     private void setUrm(UndoRedoManager urm) {
         this.urm = urm;
     }
 
+    /**
+     * Returns the HTML parser
+     *
+     * @return a HTML parser
+     */
     public HtmlParser getParser() {
         return parse;
     }
 
-    public void setParser(HtmlParser parse) {
+    /**
+     * sets the HTML parser
+     *
+     * @param parse the HTML parser
+     */
+    private void setParser(HtmlParser parse) {
         this.parse = parse;
     }
-
-    /**
-     * Runnable: change UI elements as a result of a callback
-     * Start a new Task by invoking it through SwingUtilities.invokeLater
-     */
 
 
 }

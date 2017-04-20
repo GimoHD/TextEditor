@@ -51,7 +51,7 @@ class SuggestionMenu extends JPopupMenu {
             }
 
         }
-        SwingUtilities.invokeLater(() -> textArea.grabFocus());
+        SwingUtilities.invokeLater(textArea::grabFocus);
     }
 
 
@@ -62,12 +62,11 @@ class SuggestionMenu extends JPopupMenu {
         HTML.Tag[] tags = HTML.getAllTags();
 
         for (HTML.Tag tag : tags) {
-            HTML.Tag a = tag;
             if (tag.toString().contains(subWord) && tag.isBlock()) {
                 model.addElement("<" + tag.toString() + ">" + "\n\n</" + tag.toString() + ">");
-            }else if (tag.toString().contains(subWord) && !tag.toString().equals("html")){
+            } else if (tag.toString().contains(subWord) && !tag.toString().equals("html")) {
                 model.addElement("<" + tag.toString() + ">");
-            }else if (tag.toString().contains(subWord.replace("/", ""))){
+            } else if (tag.toString().contains(subWord.replace("/", ""))) {
                 model.addElement("</" + tag.toString() + ">");
             }
         }
@@ -91,7 +90,7 @@ class SuggestionMenu extends JPopupMenu {
                 final String selectedSuggestion = (list.getSelectedValue());
                 gui.getTextArea().getDocument().remove(insertionPosition - subWord.length(), subWord.length());
                 gui.getTextArea().getDocument().insertString(insertionPosition - subWord.length(), selectedSuggestion, null);
-                gui.getTextArea().setCaretPosition(insertionPosition - subWord.length() + (selectedSuggestion.length()/2));
+                gui.getTextArea().setCaretPosition(insertionPosition - subWord.length() + (selectedSuggestion.length() / 2));
                 return;
             } catch (BadLocationException e1) {
                 e1.printStackTrace();

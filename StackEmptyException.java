@@ -1,3 +1,6 @@
+/**
+ * Empty stack exception
+ */
 public class StackEmptyException extends RuntimeException {
 
     /**

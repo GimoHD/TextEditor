@@ -1,24 +1,27 @@
 import javax.swing.*;
 
 /**
- * Created by Kristof on 4/16/2017.
+ * creates a MenuBar for a GUI
  */
 class MenuBar extends JMenuBar {
     private final JMenuItem undo;
     private final JMenuItem redo;
-    private final JMenuItem autoComplete;
-    private final JMenuItem checkDocument;
 
+    /**
+     * creates a menubar
+     *
+     * @param gui an instance of the GUI
+     */
     public MenuBar(GUI gui) {
         JMenu mi = new JMenu("Undo & redo menu");
         undo = new JMenuItem("Undo (ctrl+z)");
         redo = new JMenuItem("Redo (ctrl+y)");
-        autoComplete = new JMenuItem("Auto complete (F1)");
-        checkDocument = new JMenuItem("Check document (F2)");
+        JMenuItem autoComplete = new JMenuItem("Auto complete (F1)");
+        JMenuItem checkDocument = new JMenuItem("Check document (F2)");
         undo.setAction(new UndoAction("Undo (ctrl+z)", gui));
         redo.setAction(new RedoAction("Redo (ctrl+y)", gui));
         autoComplete.setAction(new AutoCompleteAction("Auto complete (F1)", gui));
-        checkDocument.setAction(new AutoCompleteAction("Check document (F2)", gui));
+        checkDocument.setAction(new CheckDocumentAction("Check document (F2)", gui));
         mi.add(undo);
         mi.add(redo);
         mi.add(autoComplete);
@@ -28,10 +31,16 @@ class MenuBar extends JMenuBar {
         setRedo(gui.getUrm().canRedo());
     }
 
+    /**
+     * @param un true if undo has to be enabled
+     */
     public void setUndo(boolean un) {
         undo.setEnabled(un);
     }
 
+    /**
+     * @param re true if redo has to be enabled
+     */
     public void setRedo(boolean re) {
         redo.setEnabled(re);
     }

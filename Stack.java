@@ -3,7 +3,7 @@
  *
  * @param <T> type of the elements of the stack
  */
-public interface Stack<T> {
+interface Stack<T> {
 
     /**
      * @return true if empty, otherwise false

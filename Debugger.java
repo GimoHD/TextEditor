@@ -1,5 +1,5 @@
 /**
- * @author Kristof
+ * Debugs to the console
  */
 class Debugger {
 
@@ -13,7 +13,6 @@ class Debugger {
             System.out.println("DEBUG: " + s);
         }
     }
-
 
     /**
      * Turns the debugger OFF

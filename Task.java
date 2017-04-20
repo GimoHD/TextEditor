@@ -1,12 +1,14 @@
+/**
+ * A task to undo and redo
+ */
 class Task implements Runnable {
     private final Command ev;
     private final Boolean undo;
-    private String text;
 
     /**
-     * Pass parameters in the Runnable constructor to pass data from the callback
-     *
-     * @param text which will be appended with every character
+     * A task to undo or redo
+     * @param undo true if it is an undo task
+     * @param ev a command
      */
     Task(Boolean undo, Command ev) {
         this.ev = ev;
