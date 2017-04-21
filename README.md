@@ -7,7 +7,11 @@
 * Auto completion for complete tags (every tag containing the current text will be suggested)
   * If tag is no block like the "br" or "img" tag the single tag will be suggested
   * If the tag is a block like the "body" or "h1" tag a complete tag will be suggested
-  * Picture of this completion: <br>![](http://i.imgur.com/F7Ifvgf.png)
+  * Picture of this completion: <br>
+  
+  Auto complete full tag          |  Auto complete closing tag
+  :-------------------------:|:-------------------------:
+    ![](http://i.imgur.com/BEC4vUu.png)|  ![](http://i.imgur.com/AtBYmvU.png)
   
 
 * Perform actions with Shortcuts, a Menu Bar and a Pop up menu, as seen in following tables
@@ -25,9 +29,14 @@ Menu bar                   |  Pop up menu
 * Undo and redo action: undo's complete actions 
   * (e.g.: if autocompletion is the completion will be undone or redone)
 
-* Check document action: checks the document and puts a comment where the tag is missing<br>
-  ![](http://i.imgur.com/QeG5Afk.png)
+* Check document action: checks the document and puts a comment where the tag is missing 
+(when a block in a block has double tags it will show that the closing tag is missing) <br>
+
+Missing starting tag               |  Closing tag overflow
+:-------------------------:|:-------------------------:
+  ![](http://i.imgur.com/QeG5Afk.png)|  ![](http://i.imgur.com/jC92oe2.png)
   
 * Auto complete action: auto completes the last missing tag at position of the cursor<br>
+
 ![](http://i.imgur.com/BEC4vUu.png)
 
